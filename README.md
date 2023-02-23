@@ -1,4 +1,4 @@
-                                                              Vidurkio skaičiuoklė
+                                              Vidurkio skaičiuoklė
 Programos veikimas:
 1. Paleidus programą, vartotojo yra prašoma įvesti studento vardą bei pavardę.
 2. Tada yra paklausiama kokiu būdu norima įvesti tuos pažymius (įrašyti ranka arba generuoti atsitiktinai).
