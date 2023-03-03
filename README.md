@@ -11,6 +11,7 @@
 1. Pridėta galimybė nuskaityti iš failo.
 2. Irašomi atsakymai į failą.
 3. Prie kiekvieno studento rodoma ir mediana ir galutinis vidurkis.
+4. Pridėtas rikiavimas pagal studento vardą ir pavardę.
 
 ### **Programos Patobulinimas: (v0.3)**
 1. Panaudota try-catch funkcija.
