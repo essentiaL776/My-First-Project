@@ -8,6 +8,9 @@
 #include <ctime>
 #include <iomanip>
 #include <random>
+#include <fstream>
+#include <limits>
+#include <sstream>
 
 using std::cout;
 using std::cin;
@@ -22,6 +25,11 @@ using std::accumulate;
 using std::runtime_error;
 using std::exception;
 using std::cerr;
+using std::ifstream;
+using std::numeric_limits;
+using std::streamsize;
+using std::stringstream;
+using std::ofstream;
 
 struct Student {
     string firstName;
