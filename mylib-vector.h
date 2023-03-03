@@ -38,4 +38,9 @@ struct Student {
     int finalExamGrade;
 };
 
+double calculateAverage(Student& student);
+double calculateMedian(Student& student);
+void randomGradeGenerator(int number, Student& student);
+
+
 #endif // MYLIB_H_INCLUDED
