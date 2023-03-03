@@ -41,6 +41,7 @@ struct Student {
 double calculateAverage(Student& student);
 double calculateMedian(Student& student);
 void randomGradeGenerator(int number, Student& student);
+bool compareStudents(const Student& studentA, const Student& studentB);
 
 
 #endif // MYLIB_H_INCLUDED
