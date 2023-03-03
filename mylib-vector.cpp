@@ -25,3 +25,10 @@ void randomGradeGenerator(int number, Student& student){
         student.grades.push_back(grade);
     }
 }
+bool compareStudents(const Student& studentA, const Student& studentB) {
+    if (studentA.firstName == studentB.firstName) {
+        return studentA.lastName < studentB.lastName;
+    }
+    return studentA.firstName < studentB.firstName;
+}
+

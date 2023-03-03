@@ -1,8 +1,7 @@
 #include "mylib.h"
 
-
 int main() {
-    ifstream fd("studentai10000.txt");
+    ifstream fd("studentai.txt");
     ofstream fr("Rez.txt");
     vector<Student> students;
     string firstName, lastName, line;
@@ -85,11 +84,14 @@ int main() {
                 while (ss >> grade) {
                     student.grades.push_back(grade);
                 }
+
                 student.finalExamGrade = grade;
+                student.grades.pop_back();
                 students.push_back(student);
             }
             break;
     }
+            sort(students.begin(), students.end(), compareStudents);
             fr << fixed << setw(10) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)" << setw(25) << "Final (Med.)\n";
             fr<<"--------------------------------------------------------------------------------------------\n";
             for (auto& student : students) {
