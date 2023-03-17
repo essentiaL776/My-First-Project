@@ -11,6 +11,7 @@
 #include <fstream>
 #include <limits>
 #include <sstream>
+#include <chrono>
 
 using std::cout;
 using std::cin;
@@ -31,17 +32,36 @@ using std::streamsize;
 using std::stringstream;
 using std::ofstream;
 
+
 struct Student {
     string firstName;
     string lastName;
     vector<int> grades;
     int finalExamGrade;
+    double median, average;
+};
+
+class Timer {
+    private:
+        std::chrono::time_point<std::chrono::high_resolution_clock> start;
+    public:
+        Timer() : start{std::chrono::high_resolution_clock::now()} {}
+        void reset() {
+        start = std::chrono::high_resolution_clock::now();
+        }
+        double elapsed() const {
+            return std::chrono::duration<double>
+            (std::chrono::high_resolution_clock::now() - start).count();
+    }
 };
 
 double calculateAverage(Student& student);
 double calculateMedian(Student& student);
 void randomGradeGenerator(int number, Student& student);
-bool compareStudents(const Student& studentA, const Student& studentB);
+bool compareStudentsMED(const Student& studentA, const Student& studentB);
+bool compareStudentsAVG(const Student& studentA, const Student& studentB);
+void createFile(int fileSize, int gradeAmount);
+
 
 
 #endif // MYLIB_H_INCLUDED

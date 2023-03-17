@@ -1,12 +1,15 @@
 #include "mylib.h"
 
+
 int main() {
-    ifstream fd("studentai.txt");
-    ofstream fr("Rez.txt");
+    ofstream fr1("Kietekai.txt");
+    ofstream fr2("Vargsiukai.txt");
     vector<Student> students;
     string firstName, lastName, line;
-    int grade, finalExamGrade;
+    int grade, finalExamGrade, gradeAmount, fileSize;
+    double timeT, timeB, timeC;
     int option3;
+
     cout<<"If you want to read from a file type 2 or type 1 if you want to do it manually: ";
     cin>>option3;
     switch(option3){
@@ -70,6 +73,14 @@ int main() {
                 }
                 break;
         case 2:
+            cout << "Enter the file size and the amount of grades \n";
+            cin >> fileSize >> gradeAmount;
+            Timer b;
+            createFile(fileSize, gradeAmount);
+            timeB = b.elapsed();
+
+            ifstream fd("students.txt");
+            Timer t;
             string header;
             getline(fd, header);
 
@@ -87,21 +98,71 @@ int main() {
 
                 student.finalExamGrade = grade;
                 student.grades.pop_back();
+                student.median = calculateMedian(student)*0.4+student.finalExamGrade*0.6;
+                student.average = calculateAverage(student)*0.4+student.finalExamGrade*0.6;
                 students.push_back(student);
+
             }
+            timeT = t.elapsed();
             break;
     }
-            sort(students.begin(), students.end(), compareStudents);
-            fr << fixed << setw(10) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)" << setw(25) << "Final (Med.)\n";
-            fr<<"--------------------------------------------------------------------------------------------\n";
-            for (auto& student : students) {
-                fr << fixed << setw(10) << student.firstName << setw(20) << student.lastName;
-                fr << fixed << setw(20) << setprecision(1)<< calculateAverage(student)*0.4+student.finalExamGrade*0.6;
-                fr << fixed << setw(25) << setprecision(1)<< calculateMedian(student)*0.4+student.finalExamGrade*0.6 << '\n';
+
+            cout<< "Type 1 if you want Final (Med.) or type 2 for Final (Avg.) \n";
+            int option4;
+            cin >> option4;
+            Timer a;
+            Timer c;
+            switch(option4){
+                case 1:
+                    sort(students.begin(), students.end(), compareStudentsMED);
+                    timeC = c.elapsed();
+                    fr1 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Med.)\n";
+                    fr1 <<"--------------------------------------------------------------------------------------------\n";
+                    fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Med.)\n";
+                    fr2 <<"--------------------------------------------------------------------------------------------\n";
+                    for (auto& student : students) {
+                        if(student.median >= 5){
+                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                        }
+                        else{
+                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                        }
+                    }
+                    cout<<"Creating a fille took " << timeB <<" seconds\n";
+                    cout<<"Sorting took " << timeC <<" seconds\n";
+                    cout<<"Reading from fille took " << timeT <<" seconds\n";
+                    cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
+                    break;
+
+                case 2:
+                    sort(students.begin(), students.end(), compareStudentsAVG);
+                    timeC = c.elapsed();
+                    fr1 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
+                    fr1 <<"--------------------------------------------------------------------------------------------\n";
+                    fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
+                    fr2 <<"--------------------------------------------------------------------------------------------\n";
+                    for (auto& student : students) {
+                        if(student.median >= 5){
+                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                        }
+                        else{
+                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                        }
+                    }
+                    cout<<"Creating a fille took " << timeB <<" seconds\n";
+                    cout<<"Sorting took " << timeC <<" seconds\n";
+                    cout<<"Reading from fille took " << timeT <<" seconds\n";
+                    cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
+                    break;
+
+                default:
+                    cout << "Invalid input";
+                    break;
             }
-
-
-
 
     return 0;
 }
