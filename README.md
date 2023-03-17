@@ -17,5 +17,10 @@
 1. Panaudota try-catch funkcija.
 2. Sukurtas mylib.cpp failas, kuris laiko visas funkcijas.
 
+### **Programos Patobulinimas: (v0.4)**
+1. Pridėtas failo generavimas, vartotojui leidžiama pasirinkti kokio dydžio failą nori sugeneruoti.
+2. Pridėta rušiavimo funkcija kuri rušiuoja studentus pagal jų galutinį balą didėjimo tvarka.
+3. Išvedimas dabar išveda į du skirtingus failus, viename faile studentai kurių galutinis balas 5 arba daugiau, o kitame faile mažiau nei penki.
+
 ### **Galutinio skaičiavimo formulė:**
 ![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
