@@ -7,9 +7,10 @@ int main() {
     vector<Student> students;
     string firstName, lastName, line;
     int grade, finalExamGrade, gradeAmount, fileSize;
-    double timeT, timeB, timeC;
-    int option3;
-
+    double timeT, timeB = 0, timeC;
+    int option3, option2;
+    cout<<"If you want to create a file type 1 if you don't type 2: ";
+    cin>>option2;
     cout<<"If you want to read from a file type 2 or type 1 if you want to do it manually: ";
     cin>>option3;
     switch(option3){
@@ -73,12 +74,13 @@ int main() {
                 }
                 break;
         case 2:
-            cout << "Enter the file size and the amount of grades \n";
-            cin >> fileSize >> gradeAmount;
-            Timer b;
-            createFile(fileSize, gradeAmount);
-            timeB = b.elapsed();
-
+            if(option2 == 1){
+                cout << "Enter the file size and the amount of grades \n";
+                cin >> fileSize >> gradeAmount;
+                Timer b;
+                createFile(fileSize, gradeAmount);
+                timeB = b.elapsed();
+            }
             ifstream fd("students.txt");
             Timer t;
             string header;
@@ -131,8 +133,9 @@ int main() {
                         }
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
-                    cout<<"Sorting took " << timeC <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
+                    cout<<"Sorting took " << timeC <<" seconds\n";
+                    cout<<"Printing out the answers took " << a.elapsed() - timeC <<" seconds\n";
                     cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
                     break;
 
@@ -144,7 +147,7 @@ int main() {
                     fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
                     fr2 <<"--------------------------------------------------------------------------------------------\n";
                     for (auto& student : students) {
-                        if(student.median >= 5){
+                        if(student.average >= 5){
                             fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
                             fr1 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
                         }
@@ -154,8 +157,9 @@ int main() {
                         }
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
-                    cout<<"Sorting took " << timeC <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
+                    cout<<"Sorting took " << timeC <<" seconds\n";
+                    cout<<"Printing out the answers took " << a.elapsed() - timeC <<" second\n";
                     cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
                     break;
 
