@@ -4,7 +4,7 @@
 int main() {
     ofstream fr1("Kietekai.txt");
     ofstream fr2("Vargsiukai.txt");
-    vector<Student> students;
+    deque<Student> students;
     string firstName, lastName, line;
     int grade, finalExamGrade, gradeAmount, fileSize;
     double timeT, timeB = 0, timeC;
@@ -136,7 +136,7 @@ int main() {
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
                     cout<<"Printing out the answers took " << a.elapsed() - timeC <<" seconds\n";
-                    cout<<"The program took "<<a.elapsed() + timeT +timeB<<" seconds to execute\n";
+                    cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
                     break;
 
                 case 2:

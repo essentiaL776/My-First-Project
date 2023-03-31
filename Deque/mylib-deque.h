@@ -40,7 +40,7 @@ using std::list;
 struct Student {
     string firstName;
     string lastName;
-    vector<int> grades;
+    deque<int> grades;
     int finalExamGrade;
     double median, average;
 };

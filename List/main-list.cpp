@@ -4,7 +4,7 @@
 int main() {
     ofstream fr1("Kietekai.txt");
     ofstream fr2("Vargsiukai.txt");
-    vector<Student> students;
+    list<Student> students;
     string firstName, lastName, line;
     int grade, finalExamGrade, gradeAmount, fileSize;
     double timeT, timeB = 0, timeC;
@@ -108,7 +108,6 @@ int main() {
             timeT = t.elapsed();
             break;
     }
-
             cout<< "Type 1 if you want Final (Med.) or type 2 for Final (Avg.) \n";
             int option4;
             cin >> option4;
@@ -116,7 +115,7 @@ int main() {
             Timer c;
             switch(option4){
                 case 1:
-                    sort(students.begin(), students.end(), compareStudentsMED);
+                    students.sort(compareStudentsMED);
                     timeC = c.elapsed();
                     fr1 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Med.)\n";
                     fr1 <<"--------------------------------------------------------------------------------------------\n";
@@ -136,11 +135,11 @@ int main() {
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
                     cout<<"Printing out the answers took " << a.elapsed() - timeC <<" seconds\n";
-                    cout<<"The program took "<<a.elapsed() + timeT +timeB<<" seconds to execute\n";
+                    cout<<"The program took "<<a.elapsed() + timeT + timeB<<" seconds to execute\n";
                     break;
 
                 case 2:
-                    sort(students.begin(), students.end(), compareStudentsAVG);
+                    students.sort(compareStudentsAVG);
                     timeC = c.elapsed();
                     fr1 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
                     fr1 <<"--------------------------------------------------------------------------------------------\n";

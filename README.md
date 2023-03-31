@@ -22,5 +22,24 @@
 2. Pridėta rušiavimo funkcija kuri rušiuoja studentus pagal jų galutinį balą didėjimo tvarka.
 3. Išvedimas dabar išveda į du skirtingus failus, viename faile studentai kurių galutinis balas 5 arba daugiau, o kitame faile mažiau nei penki.
 
+### **Programos Patobulinimas: (v0.5)**
+1.Pridėtos dvi kodo variacijos (Vienoje yra naudojamas deque, kitoje list).
+2.Sudaryta lentelė iš gautų laikų naudojant skirtingas variacijas (sekundėmis):
+|       **_List_**       | **1000** | **10000** | **100000** | **1000000** | **10000000** |
+|:----------------------:|----------|-----------|------------|-------------|--------------|
+| Skaitymas iš failo     | 0.006    | 0.072     | 0.664      | 7.149       | 67.232       |
+| Studentų rušiavimas    | 0        | 0.006     | 0.079      | 1.165       | 16.014       |
+| Studentų skirtsymas    | 0.004    | 0.022     | 0.235      | 2.270       | 23.914       |
+| Visas programos laikas | 0.01     | 0.101     | 0.978      | 10.584      | 107.161      |
+|      **_Vector_**      | **1000** | **10000** | **100000** | **1000000** | **10000000** |
+| Skaitymas iš failo     | 0.007    | 0.066     | 0.450      | 4.705       | 61.931       |
+| Studentų rušiavimas    | 0        | 0.006     | 0.199      | 2.459       | 15.551       |
+| Studentų skirtsymas    | 0.003    | 0.023     | 0.217      | 2.051       | 21.715       |
+| Visas programos laikas | 0.01     | 0.095     | 0.867      | 9.215       | 99.191       |
+|       **_Deque_**      | **1000** | **10000** | **100000** | **1000000** | **10000000** |
+| Skaitymas iš failo     | 0.005    | 0.044     | 0.395      | 4.435       | 42.045       |
+| Studentų rušiavimas    | 0.001    | 0.031     | 0.430      | 5.721       | 67.746       |
+| Studentų skirstymas    | 0.003    | 0.023     | 0.212      | 2.129       | 21.074       |
+| Visas programos laikas | 0.01     | 0.098     | 1.039      | 12.286      | 130.867      |
 ### **Galutinio skaičiavimo formulė:**
 ![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
