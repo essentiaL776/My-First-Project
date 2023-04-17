@@ -41,5 +41,7 @@
 | Studentų rušiavimas    | 0.001    | 0.031     | 0.430      | 5.721       | 67.746       |
 | Studentų skirstymas    | 0.003    | 0.023     | 0.212      | 2.129       | 21.074       |
 | Visas programos laikas | 0.01     | 0.098     | 1.039      | 12.286      | 130.867      |
+### **Programos Patobulinimas: (v1.0)**
+1.Pridėtos dvi studentų skirstymo strategijos 1 ir 2.
 ### **Galutinio skaičiavimo formulė:**
 ![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
