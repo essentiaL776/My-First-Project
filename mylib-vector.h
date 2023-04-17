@@ -37,6 +37,7 @@ using std::deque;
 using std::list;
 
 
+
 struct Student {
     string firstName;
     string lastName;
@@ -65,6 +66,7 @@ void randomGradeGenerator(int number, Student& student);
 bool compareStudentsMED(const Student& studentA, const Student& studentB);
 bool compareStudentsAVG(const Student& studentA, const Student& studentB);
 void createFile(int fileSize, int gradeAmount);
+void filterStudents(vector<Student>& students, vector<Student>& vargsiukai, bool sortByMedian);
 
 
 

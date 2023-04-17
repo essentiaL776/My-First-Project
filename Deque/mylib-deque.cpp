@@ -28,15 +28,15 @@ void randomGradeGenerator(int number, Student& student){
 }
 bool compareStudentsMED(const Student& studentA, const Student& studentB) {
     if(studentA.median <= studentB.median){
-        return studentA.median < studentB.median;
+        return studentA.median > studentB.median;
     }
-    return false;
+    return true;
 }
 bool compareStudentsAVG(const Student& studentA, const Student& studentB) {
     if(studentA.average <= studentB.average){
-        return studentA.average < studentB.average;
+        return studentA.average > studentB.average;
     }
-    return false;
+    return true;
 }
 void createFile(int fileSize, int gradeAmount){
     ofstream fg("students.txt");
