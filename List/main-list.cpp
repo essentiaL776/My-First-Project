@@ -108,17 +108,7 @@ int main() {
             timeT = t.elapsed();
             break;
     }
-            cout<< "Type 1 if you want Final (Med.) or type 2 for Final (Avg.) \n";
-            int option4;
-            cin >> option4;
-            cout<< "Type 1 if you want to use strategy 1 or type 2 for strategy 2 \n";
-            int option5;
-            cin>>option5;
-            if(option5 == 1){
-            Timer a;
-            switch(option4){
 
-        }
 
            cout<< "Type 1 if you want Final (Med.) or type 2 for Final (Avg.) \n";
             int option4;
@@ -140,7 +130,7 @@ int main() {
                             ++it;
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
 
                 case 2:
@@ -153,13 +143,13 @@ int main() {
                             ++it;
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
                 default:
                     cout << "Invalid input";
                     break;
                 }
-            }
+
             switch(option4){
                 case 1:
 
@@ -178,7 +168,7 @@ int main() {
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA <<" seconds\n";
+                    cout<<"Printing out the answers took " << timeA - timeC<<" seconds\n";
                     cout<<"The program took "<<timeA + timeT +timeB<<" seconds to execute\n";
                     break;
 
@@ -198,7 +188,7 @@ int main() {
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA <<" second\n";
+                    cout<<"Printing out the answers took " << timeA - timeC <<" second\n";
                     cout<<"The program took "<<timeA + timeT + timeB<<" seconds to execute\n";
                     break;
 
@@ -223,7 +213,7 @@ int main() {
                             vargsiukai.push_back(i);
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
 
                 case 2:
@@ -237,7 +227,7 @@ int main() {
                             vargsiukai.push_back(i);
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
 
                 default:
@@ -262,7 +252,7 @@ int main() {
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA <<" seconds\n";
+                    cout<<"Printing out the answers took " << timeA - timeC<<" seconds\n";
                     cout<<"The program took "<<timeA + timeT +timeB<<" seconds to execute\n";
                     break;
 
@@ -282,7 +272,7 @@ int main() {
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA  <<" second\n";
+                    cout<<"Printing out the answers took " << timeA  - timeC<<" second\n";
                     cout<<"The program took "<<timeA + timeT + timeB<<" seconds to execute\n";
                     break;
 
