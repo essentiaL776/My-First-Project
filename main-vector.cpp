@@ -1,4 +1,5 @@
 #include "mylib.h"
+#include "student.h"
 
 
 int main() {
@@ -24,12 +25,14 @@ int main() {
                         if (cin.fail()) {
                             throw runtime_error("Invalid input");
                         }
-                        Student student = {firstName, lastName};
+                        Student student;
+                        student.setFirstName(firstName);
+                        student.setLastName(lastName);
                         cout<<"Do you want to enter grades manually?(y/n)";
                         string input;
                         cin>>input;
                         if(input == "y"){
-                            cout << "Enter grades for " << student.firstName << ' ' << student.lastName << " (type '-1' when finished):\n";
+                            cout << "Enter grades for " << student.getFirstName() << ' ' << student.getLastName() << " (type '-1' when finished):\n";
                             while (cin >> grade) {
                                 if (grade == -1) {
                                     break;
@@ -38,32 +41,37 @@ int main() {
                                     throw runtime_error("Invalid input");
                                 }
                                 if(grade <= 10 && grade > 0){
-                                   student.grades.push_back(grade);
+                                   student.addGrade(grade);
                                 }
                                 else{
                                     cout<<"Enter the number between 1 and 10. Try again: ";
                                 }
 
                             }
-                            cout << "Enter final exam grade for " << student.firstName << ' ' << student.lastName << ":\n";
+                            cout << "Enter final exam grade for " << student.getFirstName() << ' ' << student.getLastName() << ":\n";
                             if (!(cin >> finalExamGrade)) {
                                 throw runtime_error("Invalid input");
                             }
                             if(finalExamGrade <= 10 && finalExamGrade > 0){
                                 cout << "Enter the first and last name of the student (type 'done done' when finished):\n";
-                                student.finalExamGrade = finalExamGrade;
+                                student.setFinalExamGrade(finalExamGrade);
                                 students.push_back(student);
                             }
                             else{
                                 cout<<"Final exam grade can only be between 1 and 10. Try again: "; cin >> finalExamGrade;
                                 cout << "Enter the first and last name of the student (type 'done done' when finished):\n";
                             }
+                            student.setMedian(calculateMedian(student)*0.4+student.getFinalExamGrade()*0.6);
+                            student.setAverage(calculateAverage(student)*0.4+student.getFinalExamGrade()*0.6);
+                            students.push_back(student);
                         }
                         if(input == "n"){
                             int number;
                             srand(time(NULL));
                             cout<<"How many grades do you want to generate?"; cin>>number;
                             randomGradeGenerator(number,student);
+                            student.setMedian(calculateMedian(student)*0.4+student.getFinalExamGrade()*0.6);
+                            student.setAverage(calculateAverage(student)*0.4+student.getFinalExamGrade()*0.6);
                             students.push_back(student);
                             cout << "Enter the first and last name of the student (type 'done done' when finished):\n";
                         }
@@ -74,7 +82,7 @@ int main() {
                 }
                 break;
         case 2:
-            if(option2 == 1){
+            if (option2 == 1) {
                 cout << "Enter the file size and the amount of grades \n";
                 cin >> fileSize >> gradeAmount;
                 Timer b;
@@ -86,27 +94,34 @@ int main() {
             string header;
             getline(fd, header);
 
+            Student* studentPtr;
+
             while (getline(fd, line)) {
                 stringstream ss(line);
                 ss >> firstName >> lastName;
-                Student student;
-                student.firstName = firstName;
-                student.lastName = lastName;
+                studentPtr = new Student(); // create a new Student object
+                studentPtr->setFirstName(firstName); // set first name
+                studentPtr->setLastName(lastName); // set last name
 
                 int grade;
                 while (ss >> grade) {
-                    student.grades.push_back(grade);
+                    studentPtr->addGrade(grade);
                 }
 
-                student.finalExamGrade = grade;
-                student.grades.pop_back();
-                student.median = calculateMedian(student)*0.4+student.finalExamGrade*0.6;
-                student.average = calculateAverage(student)*0.4+student.finalExamGrade*0.6;
-                students.push_back(student);
-
+                studentPtr->setFinalExamGrade(grade);
+                vector<int> grades = studentPtr->getGrades();
+                grades.pop_back();
+                studentPtr->addGrade(grade);
+                studentPtr->setMedian(calculateMedian(*studentPtr)*0.4+studentPtr->getFinalExamGrade()*0.6);
+                studentPtr->setAverage(calculateAverage(*studentPtr)*0.4+studentPtr->getFinalExamGrade()*0.6);
+                students.push_back(*studentPtr); // add the student object to the vector
             }
+
+            delete studentPtr; // delete the pointer after the loop
+
             timeT = t.elapsed();
             break;
+
     }
 
             cout<< "Type 1 if you want Final (Med.) or type 2 for Final (Avg.) \n";
@@ -123,7 +138,7 @@ int main() {
                     sort(students.begin(), students.end(), compareStudentsMED);
                     timeC = c.elapsed();
                     for (int i = students.size(); i > 0; i--) {
-                        if(students[i-1].median < 5){
+                        if(students[i-1].getMedian() < 5){
                             vargsiukai.push_back(students[i-1]);
                             students.pop_back();
                         }
@@ -138,7 +153,7 @@ int main() {
                     sort(students.begin(), students.end(), compareStudentsAVG);
                     timeC = c.elapsed();
                     for (int i = students.size() ; i > 0; i--) {
-                        if(students[i-1].average < 5){
+                        if(students[i-1].getAverage() < 5){
                             vargsiukai.push_back(students[i-1]);
                             students.pop_back();
                         }
@@ -161,17 +176,17 @@ int main() {
                     fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Med.)\n";
                     fr2 <<"--------------------------------------------------------------------------------------------\n";
                     for (auto& student : students) {
-                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr1 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                            fr1 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.getMedian() << '\n';
                     }
                     for (auto& student : vargsiukai) {
-                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr2 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                            fr2 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.getMedian() << '\n';
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA <<" seconds\n";
+                    cout<<"Printing out the answers took " << timeA - timeC<<" seconds\n";
                     cout<<"The program took "<<timeA + timeT +timeB<<" seconds to execute\n";
                     break;
 
@@ -181,17 +196,17 @@ int main() {
                     fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
                     fr2 <<"--------------------------------------------------------------------------------------------\n";
                     for (auto& student : students) {
-                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr1 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                            fr1 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.getAverage() << '\n';
                     }
                     for (auto& student : vargsiukai) {
-                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr2 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                            fr2 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.getAverage() << '\n';
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA  <<" second\n";
+                    cout<<"Printing out the answers took " << timeA - timeC <<" second\n";
                     cout<<"The program took "<<timeA + timeT + timeB<<" seconds to execute\n";
                     break;
 
@@ -209,29 +224,30 @@ int main() {
                     sort(students.begin(), students.end(), compareStudentsMED);
                     timeC = c.elapsed();
                     for (auto& i : students) {
-                        if(i.median >= 5.0){
+                        if(i.getMedian() >= 5.0){
                             kietekai.push_back(i);
                         }
                         else{
                             vargsiukai.push_back(i);
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
 
                 case 2:
                     sort(students.begin(), students.end(), compareStudentsAVG);
                     timeC = c.elapsed();
                     for (auto& i : students) {
-                        if(i.average >= 5.0){
+                        if(i.getAverage() >= 5.0){
                             kietekai.push_back(i);
                         }
                         else{
                             vargsiukai.push_back(i);
                         }
                     }
-                    a.elapsed();
+                    timeA = a.elapsed();
                     break;
+
 
                 default:
                     cout << "Invalid input";
@@ -245,17 +261,17 @@ int main() {
                     fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Med.)\n";
                     fr2 <<"--------------------------------------------------------------------------------------------\n";
                     for (auto& student : kietekai) {
-                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr1 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                            fr1 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.getMedian() << '\n';
                     }
                     for (auto& student : vargsiukai) {
-                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr2 << fixed << setw(20) << setprecision(1)<< student.median << '\n';
+                            fr2 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.getMedian() << '\n';
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA <<" seconds\n";
+                    cout<<"Printing out the answers took " << timeA - timeC <<" seconds\n";
                     cout<<"The program took "<<timeA + timeT +timeB<<" seconds to execute\n";
                     break;
 
@@ -265,17 +281,17 @@ int main() {
                     fr2 << fixed << setw(20) << "Name" << setw(20) << "LastName" << setw(25) << "Final (Avg.)\n";
                     fr2 <<"--------------------------------------------------------------------------------------------\n";
                     for (auto& student : kietekai) {
-                            fr1 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr1 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                            fr1 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr1 << fixed << setw(20) << setprecision(1)<< student.getAverage() << '\n';
                     }
                     for (auto& student : vargsiukai) {
-                            fr2 << fixed << setw(20) << student.firstName << setw(20) << student.lastName;
-                            fr2 << fixed << setw(20) << setprecision(1)<< student.average << '\n';
+                            fr2 << fixed << setw(20) << student.getFirstName() << setw(20) << student.getLastName();
+                            fr2 << fixed << setw(20) << setprecision(1)<< student.getAverage() << '\n';
                     }
                     cout<<"Creating a fille took " << timeB <<" seconds\n";
                     cout<<"Reading from fille took " << timeT <<" seconds\n";
                     cout<<"Sorting took " << timeC <<" seconds\n";
-                    cout<<"Printing out the answers took " << timeA  <<" second\n";
+                    cout<<"Printing out the answers took " << timeA - timeC <<" second\n";
                     cout<<"The program took "<<timeA + timeT + timeB<<" seconds to execute\n";
                     break;
 
@@ -287,13 +303,6 @@ int main() {
         else{
             cout<<"Invalid input";
         }
-
-
-
-
-
-
-
     return 0;
 }
 

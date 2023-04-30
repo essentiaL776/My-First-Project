@@ -36,15 +36,7 @@ using std::ofstream;
 using std::deque;
 using std::list;
 
-
-
-struct Student {
-    string firstName;
-    string lastName;
-    vector<int> grades;
-    int finalExamGrade;
-    double median, average;
-};
+#include "student.h"
 
 class Timer {
     private:
@@ -63,10 +55,10 @@ class Timer {
 double calculateAverage(Student& student);
 double calculateMedian(Student& student);
 void randomGradeGenerator(int number, Student& student);
-bool compareStudentsMED(const Student& studentA, const Student& studentB);
-bool compareStudentsAVG(const Student& studentA, const Student& studentB);
+bool compareStudentsMED( Student& studentA,  Student& studentB);
+bool compareStudentsAVG( Student& studentA,  Student& studentB);
 void createFile(int fileSize, int gradeAmount);
-void filterStudents(vector<Student>& students, vector<Student>& vargsiukai, bool sortByMedian);
+
 
 
 
