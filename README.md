@@ -57,5 +57,20 @@
 2. Pirma strategija remiasi skirstimu į du skirtingus vektorius vargsiukus ir kietekus
 3. Antra strategija remiasi studentų kurių galutinis pažimys mažiau nei penki išrinkimas į vargšiukų saraša ir išėmimas iš pradinio studentų sarašo.
 
+### **Programos Patobulinimas: (v1.1)**
+1.Pakeista funkcija structure į class, pagal tai sutvarkytas visas kodas.
+2. 
+| Skirstymas vector | 1000000 | 10000000 |
+|:-----------------:|---------|----------|
+| Class             | 11.102  | 109.006  |
+| Struct            | 9.215   | 99.191   |
+3.
+| Skirstymas vecto | Greitis | Makefile dydis |
+|:----------------:|---------|----------------|
+| -O3              | 1.00    | 70KB           |
+| -O2              | 1.01    | 70KB           |
+| -O1              | 1.02    | 70KB           |
+| -                | 1.06    | 119KB          |
+
 ### **Galutinio skaičiavimo formulė:**
 ![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
