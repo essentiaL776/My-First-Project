@@ -14,6 +14,7 @@
 #include <chrono>
 #include <deque>
 #include <list>
+#include <utility>
 
 using std::cout;
 using std::cin;
@@ -35,6 +36,7 @@ using std::stringstream;
 using std::ofstream;
 using std::deque;
 using std::list;
+using std::left;
 
 #include "student.h"
 

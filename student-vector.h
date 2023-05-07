@@ -11,31 +11,84 @@ private:
     int finalExamGrade;
     double median, average;
 public:
-    Student(){
+    Student() {
         firstName = "John";
         lastName = "Doe";
         finalExamGrade = 0;
         median = 0;
         average = 0;
     }
-    //
-    string getFirstName() {
+    Student(string firstNames, string lastNames, vector<int> gradess, int finalex, double med, double ave) {
+        firstName = firstNames ;
+        lastName = lastNames  ;
+        grades = gradess ;
+        finalExamGrade = finalex ;
+        median = med ;
+        average = ave ;
+    }
+    friend std::ostream& operator<<(std::ostream &out, const Student &st){
+            out<<left<<setw(15)<<st.firstName<<setw(20)<<st.lastName;
+            for (const auto &j: st.grades)
+                out << setw(5) << j << " ";
+            out << setw(5) << st.finalExamGrade << " | "<<setw(3)<<fixed<<setprecision(2)<<st.median<<" / "<<st.average<<"\n";
+            return out;
+        }
+
+    Student(const Student& other) : firstName(other.firstName), lastName(other.lastName),
+        grades(other.grades), finalExamGrade(other.finalExamGrade),
+        median(other.median), average(other.average) {}
+
+    Student(Student&& other) : firstName(std::move(other.firstName)),
+        lastName(std::move(other.lastName)), grades(std::move(other.grades)),
+        finalExamGrade(std::move(other.finalExamGrade)), median(std::move(other.median)),
+        average(std::move(other.average)) {}
+
+
+    Student& operator=(const Student& other) {
+        if (this != &other) {
+            firstName = other.firstName;
+            lastName = other.lastName;
+            grades = other.grades;
+            finalExamGrade = other.finalExamGrade;
+            median = other.median;
+            average = other.average;
+        }
+        return *this;
+    }
+
+    Student& operator=(Student&& other) {
+        if (this != &other) {
+            firstName = std::move(other.firstName);
+            lastName = std::move(other.lastName);
+            grades = std::move(other.grades);
+            finalExamGrade = std::move(other.finalExamGrade);
+            median = std::move(other.median);
+            average = std::move(other.average);
+        }
+        return *this;
+    }
+
+    ~Student() {
+        grades.clear();
+    }
+
+    string getFirstName() const {
         return firstName;
     }
 
     void setFirstName(string newfirstName) {
-        firstName = newfirstName;
+        firstName = std::move(newfirstName);
     }
 
-    string getLastName() {
+    string getLastName() const {
         return lastName;
     }
 
     void setLastName(string newlastName) {
-        lastName = newlastName;
+        lastName = std::move(newlastName);
     }
 
-    int getFinalExamGrade() {
+    int getFinalExamGrade() const {
         return finalExamGrade;
     }
 
@@ -43,7 +96,7 @@ public:
         finalExamGrade = newfinalExamGrade;
     }
 
-    double getMedian() {
+    double getMedian() const {
         return median;
     }
 
@@ -51,7 +104,7 @@ public:
         median = newMedian;
     }
 
-    double getAverage() {
+    double getAverage() const {
         return average;
     }
 
@@ -66,8 +119,7 @@ public:
     vector<int>& getGrades() {
         return grades;
     }
-
-    ~Student() {grades.clear();}
 };
+
 
 #endif // STUDENT_H
