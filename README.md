@@ -61,7 +61,7 @@
 3. Antra strategija remiasi studentų kurių galutinis pažimys mažiau nei penki išrinkimas į vargšiukų saraša ir išėmimas iš pradinio studentų sarašo.
 
 ### **Programos Patobulinimas: (v1.1)**
-1.Pakeista funkcija structure į class, pagal tai sutvarkytas visas kodas.
+1. Pakeista funkcija structure į class, pagal tai sutvarkytas visas kodas.
 2. 
 | Skirstymas vector | 1000000 | 10000000 |
 |:-----------------:|---------|----------|
@@ -76,9 +76,14 @@
 | -                | 1.06    | 119KB          |
 
 ### **Programos Patobulinimas: (v1.2)**
-1.Pridėti nauji konstruktoriai move, copy, cout.
+1. Pridėti nauji konstruktoriai move, copy, cout.
 
 ### **Programos Patobulinimas: (v1.5)**
-1.Sukurkitos dvi: bazinės klasės, skirtos bendrai aprašyti "Person" klasę ir jos išvestinę klasę  Student.
-2.Taip žmogui skirta bazinė klasė paversta abstrakčiąja klase
+1. Sukurkitos dvi: bazinės klasės, skirtos bendrai aprašyti "Person" klasę ir jos išvestinę klasę  Student.
+2. Taip žmogui skirta bazinė klasė paversta abstrakčiąja klase.
+
+### **Programos Patobulinimas: (v2.0)**
+1. Sukurta dokumentacija panaudojant Doxygen.
+2. Realizuotas Unit Test naudodamas catch.
+3. Sukurtas automatinis idiegimo failas.
 
