@@ -3,6 +3,7 @@
 
 
 int main() {
+    Person a;
     ofstream fr1("Kietekai.txt");
     ofstream fr2("Vargsiukai.txt");
     vector<Student> students, vargsiukai, kietekai;
