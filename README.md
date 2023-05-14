@@ -7,6 +7,9 @@
 4. Įrašius norimą kiekį studentų, vartotojas turi galimybę pasirinkti rezultatus: vidurkį arba medianą.
 5. Pasirinkus vartotojui yra atspausdinamas sąrašas su visais studentais ir jų  galutiniais vidurkiais arba medianomis.
 
+### **Galutinio skaičiavimo formulė:**
+![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
+
 ### **Programos Patobulinimas: (v0.2)**
 1. Pridėta galimybė nuskaityti iš failo.
 2. Irašomi atsakymai į failą.
@@ -72,8 +75,10 @@
 | -O1              | 1.02    | 70KB           |
 | -                | 1.06    | 119KB          |
 
-Programos Patobulinimas: (v1.2)
-1. Pridėti nauji konstruktoriai move, copy, cout.
+### **Programos Patobulinimas: (v1.2)**
+1.Pridėti nauji konstruktoriai move, copy, cout.
 
-### **Galutinio skaičiavimo formulė:**
-![221124441-e0c14ec4-e460-4933-825f-db93016aa331](https://user-images.githubusercontent.com/114932724/221128880-71e33630-0287-4343-875e-f2d45e2759e7.png)
+### **Programos Patobulinimas: (v1.5)**
+1.Sukurkitos dvi: bazinės klasės, skirtos bendrai aprašyti "Person" klasę ir jos išvestinę klasę  Student.
+2.Taip žmogui skirta bazinė klasė paversta abstrakčiąja klase
+
