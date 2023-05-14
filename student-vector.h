@@ -3,10 +3,32 @@
 
 #include "mylib.h"
 
-class Student {
+class Person
+{
+protected:
+    string firstName, lastName;
+public:
+    Person(string firstNames, string lastNames)
+    {
+        firstName = firstNames;
+        lastName = lastNames;
+    }
+    Person()
+    {
+        firstName = "";
+        lastName = "";
+    }
+    virtual string getFirstName() const = 0;
+
+    ~Person() {
+        firstName.clear();
+        lastName.clear();
+    }
+
+};
+
+class Student: public Person {
 private:
-    string firstName;
-    string lastName;
     vector<int> grades;
     int finalExamGrade;
     double median, average;
@@ -18,7 +40,7 @@ public:
         median = 0;
         average = 0;
     }
-    Student(string firstNames, string lastNames, vector<int> gradess, int finalex, double med, double ave) {
+    Student(string firstNames, string lastNames, vector<int> gradess, int finalex, double med, double ave) : Person(firstNames, lastNames){
         firstName = firstNames ;
         lastName = lastNames  ;
         grades = gradess ;
@@ -34,12 +56,11 @@ public:
             return out;
         }
 
-    Student(const Student& other) : firstName(other.firstName), lastName(other.lastName),
+    Student(const Student& other): Person(other.firstName, other.lastName) ,
         grades(other.grades), finalExamGrade(other.finalExamGrade),
         median(other.median), average(other.average) {}
 
-    Student(Student&& other) : firstName(std::move(other.firstName)),
-        lastName(std::move(other.lastName)), grades(std::move(other.grades)),
+    Student(Student&& other) : Person(std::move(other.firstName), std::move(other.lastName)), grades(std::move(other.grades)),
         finalExamGrade(std::move(other.finalExamGrade)), median(std::move(other.median)),
         average(std::move(other.average)) {}
 
